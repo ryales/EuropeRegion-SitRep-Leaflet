@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NRCS - SitRep</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+        <link href='css/map.css' rel='stylesheet' />
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+		<script src="js/L.Map.Sync.js"></script>
+		<script src="js/geostats.min.js"></script>
+		<script src="data/totality_response.js"></script>
+        <script src="data/styles.js"></script>
+        <script src="data/response_countries.js"></script>
+        <script type="text/javascript">var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <!-- Page content -->
+        <div class="container dashboard">
+			<div class="row" class="line">
+				<div class="col-md-3">
+					<h2>NRCS - SitRep</h2>
+					<p class="subtitle">Earthquake 2015 - Situation Report</p>
+				</div>
+				<div class="col-md-5 spacersm" align="center">
+					<p>
+					<img src="http://www.nrcs.org/sites/all/themes/nrcs/logo.png" height="28">
+					<img src="http://www.ifrc.org/Global/ifrc.org/Logos/IFRC-logo.gif" height="22">
+					<br/>
+					<i>Report published the 18th of June 2015</i>
+					</p>
+				</div>
+				<div class="col-md-4 spacersm">
+					<p>
+					Source: <a href="www.nrcs.org" target="_blank">Nepal Red Cross Society </a> <br/>
+					Produced by SIMS supported by ARC and BRC<br/>
+					For feedback email: <a href="mailto:RYales@redcross.org.uk?subject=EuropeMigration SitRep -- Feedback">RYales@redcross.org.uk</a>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<br />
+					<p  align="center">Choose layers to show using the button on the top right of the maps. Hover the maps with the house to display figures at Country level.</p>
+					<br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="row">
+						<div id='map1' style="height: 280px"></div>
+					<br />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div id="dmg_dis" class="col-md-4" align="right"><b>District</b></div>
+						<div class="col-md-3" align="right"><b>Total</b></div>
+						<div class="col-md-5"><b>Type</b><div style='line-height:95%'><br /></div></div>
+						<div class="line"><br /></div>
+						<div id="dmg_dis_1" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_1" class="col-md-3" align="right">-</div>
+						<div class="col-md-5">Total Migrants<div style='line-height:95%'><br /></div></div>
+						<div id="dmg_dis_2" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_2" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Active Staff<div style='line-height:95%'><br /></div></div>
+						<div id="dmg_dis_3" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_3" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Active Volunteers<div style='line-height:95%'><br /></div></div>
+						<div id="dmg_dis_4" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_4" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Bilateral Volunteers<div style='line-height:95%'><br /></div></div>
+						<div id="dmg_dis_5" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_5" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Surge Volunteers<div style='line-height:95%'><br /></div></div>
+						<div id="dmg_dis_6" class="col-md-4"  align="right">-</div>
+						<div id="dmg_full_6" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Active Locations<div style='line-height:95%'><br /></div></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col-md-8">
+					<div class="row">
+						<div id='map2' style="height: 280px"></div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div>
+					<div class="row">						
+						<div id="dist_dis" class="col-md-4" align="right"><b>District</b></div>
+						<div class="col-md-3" align="right"><b>Total</b></div>
+						<div class="col-md-5"><b>Distributed Item</b><div style='line-height:95%'><br /></div></div>
+						<div class="line"><br /></div>
+						<div id="dist_dis_1" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_1" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">NFRI-Full-set<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_2" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_2" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Tarpaulin<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_3" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_3" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Blankets<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_4" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_4" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">ORS<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_5" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_5" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Hygiene-kits<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_6" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_6" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Aqua-Tab<div style='line-height:95%'><br /></div></div>
+						<div id="dist_dis_7" class="col-md-4"  align="right">-</div>
+						<div id="dist_full_7" class="col-md-3"  align="right">-</div>
+						<div class="col-md-5">Soap<div style='line-height:95%'><br /></div></div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="row">
+        	<br />
+        </div>	
+        <p class="subtitle" align="center"><br />The maps used do not imply the expression of any opinion on the part of the International Federation of Red Cross and Red Crescent Societies or National Societies concerning the legal status of a territory or of its authorities.<p/>
+        <script src="js/main.js"></script>
+    </body>
+</html>
